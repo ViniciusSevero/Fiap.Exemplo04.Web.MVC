@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Cadastrar";
+}
+
+<h2>Cadastrar</h2>
+
+@using (@Html.BeginForm())
+{
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.Label("Nome")
+                @Html.TextBox("Nome", new { @class = "form-control" }) <!--qualquer atributo do html, (arroba) é escape-->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.Label("DataNascimento")
+                @Html.TextBox("DataNascimento", new { @class = "form-control" }) <!--qualquer atributo do html, (arroba) é escape-->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.Label("GrupoId")
+                @Html.TextBox("GrupoId", new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.Label("Bolsa")
+                @Html.TextBox("Bolsa", new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row desconto">
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.Label("Desconto")
+                @Html.TextBox("Desconto", new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                @Html.Label("Cep")
+                @Html.TextBox("Cep", new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+
+    <input type="submit" value="Enviar" class="btn btn-primary" />
+}
