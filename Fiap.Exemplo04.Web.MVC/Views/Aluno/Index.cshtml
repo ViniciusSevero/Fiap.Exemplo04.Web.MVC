@@ -17,3 +17,26 @@
     </thead>
     <tbody></tbody>
 </table>
+
+@section scripts{
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "http://localhost:64015/api/Aluno/",
+            method: "GET",
+            success: function (data) {
+                $.each(data, function (idx, item) {
+                    var linha = $("<tr>");//cria linha
+                    linha.append($("<td>").text(item.Nome));
+                    linha.append($("<td>").text(item.Bolsa));
+                    linha.append($("<td>").text(item.Desconto));
+                    linha.append($("<td>").text(item.DataNascimento));
+
+                    $("tbody").append(linha);
+                });
+
+            }
+        });
+    });
+</script>
+    }
