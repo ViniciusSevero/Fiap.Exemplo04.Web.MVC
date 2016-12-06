@@ -5,14 +5,13 @@
 
 <h2>Cadastrar</h2>
 
-@using (@Html.BeginForm())
-{
+<div id="erros"></div>
 
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
                 @Html.Label("Nome")
-                @Html.TextBox("Nome", new { @class = "form-control" }) <!--qualquer atributo do html, (arroba) é escape-->
+                @Html.TextBox("Nome", null, new { @class = "form-control" }) <!--qualquer atributo do html, (arroba) é escape-->
             </div>
         </div>
     </div>
@@ -20,7 +19,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 @Html.Label("DataNascimento")
-                @Html.TextBox("DataNascimento", new { @class = "form-control" }) <!--qualquer atributo do html, (arroba) é escape-->
+                @Html.TextBox("DataNascimento", null, new { @class = "form-control" }) <!--qualquer atributo do html, (arroba) é escape-->
             </div>
         </div>
     </div>
@@ -28,15 +27,15 @@
         <div class="col-md-12">
             <div class="form-group">
                 @Html.Label("GrupoId")
-                @Html.TextBox("GrupoId", new { @class = "form-control" })
+                @Html.TextBox("GrupoId", null, new { @class = "form-control" })
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
+                @Html.CheckBox("Bolsa", false)
                 @Html.Label("Bolsa")
-                @Html.TextBox("Bolsa", new { @class = "form-control" })
             </div>
         </div>
     </div>
@@ -44,7 +43,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 @Html.Label("Desconto")
-                @Html.TextBox("Desconto", new { @class = "form-control" })
+                @Html.TextBox("Desconto", null, new { @class = "form-control" })
             </div>
         </div>
     </div>
@@ -52,10 +51,41 @@
         <div class="col-md-12">
             <div class="form-group">
                 @Html.Label("Cep")
-                @Html.TextBox("Cep", new { @class = "form-control" })
+                @Html.TextBox("Cep", null, new { @class = "form-control" })
             </div>
         </div>
     </div>
 
-    <input type="submit" value="Enviar" class="btn btn-primary" />
+    <button id="btnSubmit" class="btn btn-primary">Enviar</button>
+
+@section scripts{
+<script>
+    $(document).ready(function () {
+        $("#btnSubmit").click(function () {
+            $.ajax({
+                url: "http://localhost:64015/api/Aluno/",
+                data: {
+                    Nome: $("#Nome").val(),
+                    DataNascimento: $("#DataNascimento").val(),
+                    GrupoId: $("#GrupoId").val(),
+                    Bolsa: $("#Bolsa").val(),
+                    Desconto: $("#Desconto").val(),
+                    Cep: $("#Cep").val()
+                },
+                method: "POST",
+                success: function (data) {
+                    $("#erros").html("Aluno cadastrado com sucesso!");
+                    $("#erros").removeClass("alert alert-danger");
+                    $("#erros").addClass("alert alert-success");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    $("#erros").html(xhr.responseText);
+                    $("#erros").removeClass("alert alert-success");
+                    $("#erros").addClass("alert alert-danger");
+                }
+            });
+        });
+    });
+</script>
 }
+
